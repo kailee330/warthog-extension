@@ -27,20 +27,26 @@ jobs:
           VERSION=$(grep '"version"' public/manifest.json | sed -E 's/.*"version": "([^"]+)".*/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
+      - name: Zip Extension for Reviewer
+        run: |
+          zip -r -FS warthog_addon_reviewer.zip * --exclude '*.git*'
+
       - name: Zip Extension
         run: |
           cd build
           zip -r -FS ../warthog_addon.zip * --exclude '*.git*'
 
       - name: sign the extension
+        continue-on-error: true
         uses: cardinalby/webext-buildtools-firefox-sign-xpi-action@v1
         with:
-          timeoutMs: 200000
+          timeoutMs: 2000000
           zipFilePath: 'warthog_addon.zip'
           xpiFilePath: 'warthog_addon_firefox.xpi'
           jwtIssuer: ${{ secrets.FF_JWT_ISSUER }}
           jwtSecret: ${{ secrets.FF_JWT_SECRET }}
           extensionId: ${{ secrets.FF_EXTENSION_ID }}
+        
         
 
       - name: Release
@@ -48,6 +54,7 @@ jobs:
         with:
           tag_name : ${{ env.VERSION }}
           files: |
+            warthog_addon_reviewer.zip
             warthog_addon.zip
             warthog_addon_firefox.xpi
 

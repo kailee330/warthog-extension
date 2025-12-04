@@ -50,18 +50,14 @@ interface WalletContextProps {
 }
 
 const defaultNodeList = [
-    'http://193.218.118.57:3001',
-    'http://185.209.228.16:3001',
-    'http://89.117.150.162:3001',
+    'http://217.182.64.43:3001',
     'http://51.75.21.134:3001',
     'http://62.72.44.89:3001',
-    'https://dev.node-s.com:3001'
+    'http://dev.node-s.com:3001'
 ];
 
 const defaultNodeNameList = [
-    'pumbaa',
-    'blu & EU',
-    'blu & Central US',
+    'Public',
     'polaire',
     'blu & Asia',
     'johnnyb Us East'

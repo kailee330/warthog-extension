@@ -79,7 +79,7 @@ function SendFinalStep() {
             const pinHeight = headResponse.data.pinHeight as number;
             const nonceId = nonce + 1;
             setNonce(nonceId);
-            const rawFeeE8 = "9999";
+            const rawFeeE8 = "100032";
             const result = (await axios.get(`${nodeList[selectedNodeIndex]}/tools/encode16bit/from_e8/` + rawFeeE8)).data;
             const feeE8 = result.data.roundedE8;
 
